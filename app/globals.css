@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Light mode */
+    --background: 0 0% 100%;     /* white */
+    --foreground: 0 0% 0%;       /* black */
+    --accent: 0 0% 94%;          /* light grey */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+  }
+
+  .dark {
+    /* Dark mode */
+    --background: 0 0% 0%;       /* black */
+    --foreground: 0 0% 100%;     /* white */
+    --accent: 0 0% 15%;          /* dark grey */
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Gradient animation */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradient 8s linear infinite;
+    will-change: background-position;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur-md;
+    background-color: hsl(var(--accent) / 0.6);
+  }
+
+  .dark .glass-effect {
+    background-color: hsl(var(--accent) / 0.4);
+    border-color: hsl(var(--foreground) / 0.2);
+  }
+}
